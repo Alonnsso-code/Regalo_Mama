@@ -1,4 +1,4 @@
-// --- 1. LÓGICA DE LA PANTALLA DE CARGA ---
+//Logica de la pantalla de carga
 const corazon = document.getElementById('corazon');
 const barraProgreso = document.getElementById('barra-progreso');
 const mensajeCarga = document.getElementById('mensaje-carga');
@@ -32,7 +32,7 @@ corazon.addEventListener('click', () => {
     }
 });
 
-// --- 2. LÓGICA DE LAS CARTAS (Diseño de Autor) ---
+//Logica de las cartas
 const textosFamilia = {
     'alonso': { titulo: "De: Diego", cuerpo: "Feliz cumpleaños mamá.\n\nEres la mejor del mundo y quería hacerte este detalle para que lo tengas siempre en tu celular." },
     'hermana': { titulo: "De: Flo", cuerpo: "Escribe aquí el mensaje de tu hermana..." },
@@ -54,19 +54,19 @@ function cerrarCarta() {
     modalCarta.classList.add('modal-oculto');
 }
 
-// --- 3. LÓGICA DE LOS PUNTITOS DEL CARRUSEL ---
+//Logica de los puntitos del carrusel
 const carrusel = document.getElementById('carrusel');
 const puntos = document.querySelectorAll('.punto');
 
-// Detecta qué foto está en el centro de la pantalla
+//Detecta qué foto está en el centro de la pantalla
 carrusel.addEventListener('scroll', () => {
-    // Calcula el índice de la foto actual dividiendo el scroll por el ancho del carrusel
+    //Calcula el índice de la foto actual dividiendo el scroll por el ancho del carrusel
     let index = Math.round(carrusel.scrollLeft / carrusel.clientWidth);
     
-    // Remueve la clase 'activo' de todos los puntos
+    //Remueve la clase 'activo' de todos los puntos
     puntos.forEach(punto => punto.classList.remove('activo'));
     
-    // Se la añade solo al punto de la foto actual
+    //Se la añade solo al punto de la foto actual
     if(puntos[index]) {
         puntos[index].classList.add('activo');
     }
