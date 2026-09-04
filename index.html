@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Mamá</title>
+    <!-- Importamos las fuentes Aesthetic: Playfair Display (Elegante) y Dancing Script (Cursiva) -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Pantalla de carga interactiva -->
+    <div id="pantalla-carga">
+        <p id="mensaje-carga">Toca el corazón</p>
+        <div id="corazon">❤️</div>
+        
+        <div class="contenedor-barra">
+            <div id="barra-progreso"></div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main id="contenido-principal" class="oculto">
+        
+        <div class="cabecera">
+            <h1>Hoy cumple años una persona<br><i>muy especial</i></h1>
+            <p class="fecha-estetica">Para mamá</p>
+        </div>
+
+        <!-- Carrusel de fotos estilo Polaroid Centrado -->
+        <div class="envoltura-carrusel">
+            <div class="contenedor-carrusel" id="carrusel">
+                
+                <div class="polaroid">
+                    <img src="https://placehold.co/400x400/E3D5CA/5C4D43?text=Foto+1" alt="Recuerdo 1">
+                    <p class="texto-polaroid">Un lindo recuerdo</p>
+                </div>
+
+                <div class="polaroid">
+                    <img src="https://placehold.co/400x400/E3D5CA/5C4D43?text=Foto+2" alt="Recuerdo 2">
+                    <p class="texto-polaroid">Momentos felices</p>
+                </div>
+
+                <div class="polaroid">
+                    <img src="https://placehold.co/400x400/E3D5CA/5C4D43?text=Foto+3" alt="Recuerdo 3">
+                    <p class="texto-polaroid">Te queremos mucho</p>
+                </div>
+
+            </div>
+            
+            <!-- Puntitos indicadores del Slider -->
+            <div class="puntos-carrusel">
+                <span class="punto activo"></span>
+                <span class="punto"></span>
+                <span class="punto"></span>
+            </div>
+        </div>
+
+        <!-- Sección de cartas de la familia -->
+        <div class="contenedor-cartas">
+            <h2>Mensajes para ti</h2>
+            <div class="cuadricula-cartas">
+                <div class="sobre" onclick="abrirCarta('alonso')"><span>Diego</span></div>
+                <div class="sobre" onclick="abrirCarta('hermana')"><span>Flo</span></div>
+                <div class="sobre" onclick="abrirCarta('hermano')"><span>Emi</span></div>
+                <div class="sobre" onclick="abrirCarta('papa')"><span>Amor</span></div>
+            </div>
+        </div>
+
+        <!-- Sección final: Brindis -->
+        <div class="seccion-final">
+            <h2 class="texto-brindis">Por muchos años más juntos</h2>
+            
+            <div class="animacion-brindis">
+                <div class="copa copa-izq">🥂</div>
+                <div class="copa copa-der">🥂</div>
+            </div>
+
+            <div class="polaroid foto-final">
+                <img src="https://placehold.co/400x400/E3D5CA/5C4D43?text=Foto+Final" alt="Último recuerdo">
+                <p class="texto-polaroid">¡Te amamos muchísimo!</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal de la carta -->
+    <div id="modal-carta" class="modal-oculto">
+        <div class="carta-abierta">
+            <button class="boton-cerrar" onclick="cerrarCarta()">X</button>
+            <h3 id="remitente-carta"></h3>
+            <div class="sello-cera"></div>
+            <p id="texto-carta"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
