@@ -1,15 +1,23 @@
-//Logica de la pantalla de carga
+// --- 1. LÓGICA DE LA PANTALLA DE CARGA ---
 const corazon = document.getElementById('corazon');
 const barraProgreso = document.getElementById('barra-progreso');
 const mensajeCarga = document.getElementById('mensaje-carga');
 const pantallaCarga = document.getElementById('pantalla-carga');
 const contenidoPrincipal = document.getElementById('contenido-principal');
+const musicaFondo = document.getElementById('musica-fondo'); // Seleccionamos el audio
 
 let progreso = 0;
 const incremento = 20;
 const mensajes = ["Toca el corazón", "Siente el amor...", "Un poco más...", "Casi listo...", "¡Una última vez!"];
+let musicaIniciada = false; // Variable para saber si la música ya empezó
 
 corazon.addEventListener('click', () => {
+    // Si es el primer toque, empieza a reproducir la música
+    if (!musicaIniciada) {
+        musicaFondo.play();
+        musicaIniciada = true;
+    }
+
     if (progreso < 100) {
         progreso += incremento;
         barraProgreso.style.width = `${progreso}%`;
