@@ -99,13 +99,26 @@ body {
 
 .sobre {
     background-color: var(--sobre-bg);
-    height: 80px; border-radius: 4px;
+    height: 80px; 
+    border-radius: 4px;
     display: flex; justify-content: center; align-items: center;
-    cursor: pointer; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); 
-    border: 1px solid #D4C4B7; transition: transform 0.2s ease;
+    cursor: pointer; 
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    border: 1px solid #D4C4B7; 
+    transition: transform 0.2s ease;
+    
+    /* Agregamos la animación de respiración infinita */
+    animation: respirar 3s infinite ease-in-out;
 }
+
 .sobre span { font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--texto-oscuro); }
 .sobre:active { transform: scale(0.95); }
+
+/* La instrucción de movimiento para que "respiren" */
+@keyframes respirar {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); } /* Crece apenas un 3% en su punto máximo */
+}
 
 /* CARTA SUPERPUESTA */
 #modal-carta {
