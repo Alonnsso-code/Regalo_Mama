@@ -64,32 +64,64 @@ const textosFamilia = {
     }
 };
 
+// --- MAQUINITA PARA EL EFECTO FADE DE AUDIO ---
+function desvanecerVolumen(audio, accion) {
+    let volumen = accion === 'subir' ? 0 : 1;
+    audio.volume = volumen; // Aseguramos que empiece en 0 o 1
+    
+    if (accion === 'subir') {
+        audio.play();
+    }
+
+    let fade = setInterval(() => {
+        if (accion === 'subir') {
+            volumen += 0.05; // Sube el volumen un 5%
+            if (volumen >= 1) {
+                audio.volume = 1;
+                clearInterval(fade); // Detiene la maquinita
+            } else {
+                audio.volume = Math.min(1, volumen); // Por seguridad, nunca pasa de 1
+            }
+        } else {
+            volumen -= 0.05; // Baja el volumen un 5%
+            if (volumen <= 0) {
+                audio.volume = 0;
+                audio.pause(); // Pausa la canción cuando llega a cero
+                clearInterval(fade); // Detiene la maquinita
+            } else {
+                audio.volume = Math.max(0, volumen); // Por seguridad, nunca baja de 0
+            }
+        }
+    }, 40); // Esto hace que el cambio tarde unos 800 milisegundos en total (súper suave)
+}
+
+// --- NUEVAS FUNCIONES DE LAS CARTAS ---
 const modalCarta = document.getElementById('modal-carta');
 const tituloRemitente = document.getElementById('remitente-carta');
 const textoCarta = document.getElementById('texto-carta');
-const musicaCarta = document.getElementById('musica-carta'); // Seleccionamos el nuevo audio
+const musicaCarta = document.getElementById('musica-carta');
+const musicaFondo = document.getElementById('musica-fondo');
 
 function abrirCarta(autor) {
-    // 1. Pausar la música de fondo general
-    document.getElementById('musica-fondo').pause();
-    // 2. Inyectar textos
+    // 1. Mostrar la carta visualmente de inmediato
     tituloRemitente.textContent = textosFamilia[autor].titulo;
     textoCarta.textContent = textosFamilia[autor].cuerpo;
-    // 3. Inyectar y reproducir la canción específica
-    musicaCarta.src = textosFamilia[autor].cancion;
-    musicaCarta.play();
-    // 4. Mostrar la carta
     modalCarta.classList.remove('modal-oculto');
+
+    // 2. Magia de audio cruzado: baja el fondo y sube la carta
+    desvanecerVolumen(musicaFondo, 'bajar');
+    
+    musicaCarta.src = textosFamilia[autor].cancion;
+    desvanecerVolumen(musicaCarta, 'subir');
 }
+
 function cerrarCarta() {
     // 1. Ocultar la carta
     modalCarta.classList.add('modal-oculto');
-    // 2. Pausar la canción de la carta
-    musicaCarta.pause();
-    // 3. Volver a reproducir la música de fondo general
-    setTimeout(() => {
-        document.getElementById('musica-fondo').play();
-    }, 500);
+    
+    // 2. Magia de audio cruzado inverso: baja la carta y sube el fondo
+    desvanecerVolumen(musicaCarta, 'bajar');
+    desvanecerVolumen(musicaFondo, 'subir');
 }
 
 //Logica de los puntitos del carrusel
