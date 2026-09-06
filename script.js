@@ -87,7 +87,9 @@ function cerrarCarta() {
     // 2. Pausar la canción de la carta
     musicaCarta.pause();
     // 3. Volver a reproducir la música de fondo general
-    document.getElementById('musica-fondo').play();
+    setTimeout(() => {
+        document.getElementById('musica-fondo').play();
+    }, 500);
 }
 
 //Logica de los puntitos del carrusel
