@@ -40,26 +40,54 @@ corazon.addEventListener('click', () => {
     }
 });
 
-//Logica de las cartas
+// --- 2. LÓGICA DE LAS CARTAS (Diseño de Autor) ---
 const textosFamilia = {
-    'alonso': { titulo: "De: Diego", cuerpo: "Feliz cumpleaños mamá.\n\nEres la mejor del mundo y quería hacerte este detalle para que lo tengas siempre en tu celular." },
-    'hermana': { titulo: "De: Flo", cuerpo: "Escribe aquí el mensaje de tu hermana..." },
-    'hermano': { titulo: "De: Emi", cuerpo: "Escribe aquí el mensaje de tu hermano..." },
-    'papa': { titulo: "De: Cristian", cuerpo: "Escribe aquí el mensaje de tu papá..." }
+    'alonso': { 
+        titulo: "De: Diego", 
+        cuerpo: "Feliz cumpleaños mamá.\n\nEres la mejor del mundo y quería hacerte este detalle para que lo tengas siempre en tu celular.",
+        cancion: "cancion-alonso.mp3" 
+    },
+    'hermana': { 
+        titulo: "De: Flo", 
+        cuerpo: "Escribe aquí el mensaje de tu hermana...",
+        cancion: "cancion-hermana.mp3" 
+    },
+    'hermano': { 
+        titulo: "De: Emi", 
+        cuerpo: "Escribe aquí el mensaje de tu hermano...",
+        cancion: "cancion-hermano.mp3" 
+    },
+    'papa': { 
+        titulo: "De: Amor", 
+        cuerpo: "Escribe aquí el mensaje de tu papá...",
+        cancion: "cancion-papa.mp3" 
+    }
 };
 
 const modalCarta = document.getElementById('modal-carta');
 const tituloRemitente = document.getElementById('remitente-carta');
 const textoCarta = document.getElementById('texto-carta');
+const musicaCarta = document.getElementById('musica-carta'); // Seleccionamos el nuevo audio
 
 function abrirCarta(autor) {
+    // 1. Pausar la música de fondo general
+    document.getElementById('musica-fondo').pause();
+    // 2. Inyectar textos
     tituloRemitente.textContent = textosFamilia[autor].titulo;
     textoCarta.textContent = textosFamilia[autor].cuerpo;
+    // 3. Inyectar y reproducir la canción específica
+    musicaCarta.src = textosFamilia[autor].cancion;
+    musicaCarta.play();
+    // 4. Mostrar la carta
     modalCarta.classList.remove('modal-oculto');
 }
-
 function cerrarCarta() {
+    // 1. Ocultar la carta
     modalCarta.classList.add('modal-oculto');
+    // 2. Pausar la canción de la carta
+    musicaCarta.pause();
+    // 3. Volver a reproducir la música de fondo general
+    document.getElementById('musica-fondo').play();
 }
 
 //Logica de los puntitos del carrusel
