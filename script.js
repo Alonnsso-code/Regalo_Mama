@@ -73,26 +73,35 @@ const textosFamilia = {
     }
 };
 
-// --- 3. MAQUINITA PARA EL EFECTO FADE DE AUDIO ---
+// --- 3. MAQUINITA PARA EL EFECTO FADE DE AUDIO (VERSIÓN MEJORADA) ---
 function desvanecerVolumen(audio, accion) {
-    if (!audio) return; // AIRBAG: Si el audio no existe, no hace nada
+    if (!audio) return; 
     
-    let volumen = accion === 'subir' ? 0 : 1;
-    audio.volume = Math.max(0, Math.min(1, volumen)); 
+    // 1. Si había un efecto de volumen ocurriendo antes, lo detenemos en seco para que no peleen
+    if (audio.intervaloFade) {
+        clearInterval(audio.intervaloFade);
+    }
+    
+    // 2. Partimos del volumen en el que esté la canción en este momento exacto
+    let volumen = audio.volume; 
     
     if (accion === 'subir') {
+        if (audio.paused) volumen = 0; // Si estaba en pausa, empezamos desde cero
+        audio.volume = volumen;
+        
         let promesa = audio.play();
         if (promesa !== undefined) {
-            promesa.catch(e => console.log("Audio de carta en espera"));
+            promesa.catch(e => console.log("Esperando a que cargue el audio..."));
         }
     }
 
-    let fade = setInterval(() => {
+    // 3. Guardamos la maquinita en el mismo audio para poder detenerla después
+    audio.intervaloFade = setInterval(() => {
         if (accion === 'subir') {
             volumen += 0.05; 
             if (volumen >= 1) {
                 audio.volume = 1;
-                clearInterval(fade); 
+                clearInterval(audio.intervaloFade); 
             } else {
                 audio.volume = volumen; 
             }
@@ -101,9 +110,9 @@ function desvanecerVolumen(audio, accion) {
             if (volumen <= 0) {
                 audio.volume = 0;
                 audio.pause(); 
-                clearInterval(fade); 
+                clearInterval(audio.intervaloFade); 
             } else {
-                audio.volume = Math.max(0, Math.min(1, volumen)); 
+                audio.volume = volumen; 
             }
         }
     }, 40); 
