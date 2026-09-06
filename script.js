@@ -5,7 +5,6 @@ const mensajeCarga = document.getElementById('mensaje-carga');
 const pantallaCarga = document.getElementById('pantalla-carga');
 const contenidoPrincipal = document.getElementById('contenido-principal');
 
-// Variables de audio
 const musicaFondo = document.getElementById('musica-fondo');
 const musicaCarta = document.getElementById('musica-carta');
 
@@ -15,12 +14,19 @@ const mensajes = ["Toca el corazón", "Siente el amor...", "Un poco más...", "C
 let musicaIniciada = false;
 
 corazon.addEventListener('click', () => {
-    // Al primer clic, inicia la música de fondo
+    // AIRBAG: Sistema de seguridad. Solo reproduce si el audio existe.
     if (!musicaIniciada) {
-        musicaFondo.play();
+        if (musicaFondo) {
+            let promesa = musicaFondo.play();
+            // Evita que un error de carga de archivo congele la página
+            if (promesa !== undefined) {
+                promesa.catch(error => console.log("Audio no encontrado o en espera"));
+            }
+        }
         musicaIniciada = true;
     }
 
+    // La barra de progreso avanza independientemente del audio
     if (progreso < 100) {
         progreso += incremento;
         barraProgreso.style.width = `${progreso}%`;
@@ -69,11 +75,16 @@ const textosFamilia = {
 
 // --- 3. MAQUINITA PARA EL EFECTO FADE DE AUDIO ---
 function desvanecerVolumen(audio, accion) {
+    if (!audio) return; // AIRBAG: Si el audio no existe, no hace nada
+    
     let volumen = accion === 'subir' ? 0 : 1;
-    audio.volume = volumen; 
+    audio.volume = Math.max(0, Math.min(1, volumen)); 
     
     if (accion === 'subir') {
-        audio.play();
+        let promesa = audio.play();
+        if (promesa !== undefined) {
+            promesa.catch(e => console.log("Audio de carta en espera"));
+        }
     }
 
     let fade = setInterval(() => {
@@ -83,7 +94,7 @@ function desvanecerVolumen(audio, accion) {
                 audio.volume = 1;
                 clearInterval(fade); 
             } else {
-                audio.volume = Math.min(1, volumen); 
+                audio.volume = volumen; 
             }
         } else {
             volumen -= 0.05; 
@@ -92,7 +103,7 @@ function desvanecerVolumen(audio, accion) {
                 audio.pause(); 
                 clearInterval(fade); 
             } else {
-                audio.volume = Math.max(0, volumen); 
+                audio.volume = Math.max(0, Math.min(1, volumen)); 
             }
         }
     }, 40); 
@@ -104,37 +115,39 @@ const tituloRemitente = document.getElementById('remitente-carta');
 const textoCarta = document.getElementById('texto-carta');
 
 function abrirCarta(autor) {
-    // 1. Mostrar la carta visualmente
     tituloRemitente.textContent = textosFamilia[autor].titulo;
     textoCarta.textContent = textosFamilia[autor].cuerpo;
     modalCarta.classList.remove('modal-oculto');
 
-    // 2. Transición de audio: baja el fondo y sube la carta
     desvanecerVolumen(musicaFondo, 'bajar');
     
-    musicaCarta.src = textosFamilia[autor].cancion;
-    desvanecerVolumen(musicaCarta, 'subir');
+    if (musicaCarta) {
+        musicaCarta.src = textosFamilia[autor].cancion;
+        desvanecerVolumen(musicaCarta, 'subir');
+    }
 }
 
 function cerrarCarta() {
-    // 1. Ocultar la carta visualmente
     modalCarta.classList.add('modal-oculto');
     
-    // 2. Transición de audio: baja la carta y sube el fondo
     desvanecerVolumen(musicaCarta, 'bajar');
-    desvanecerVolumen(musicaFondo, 'subir');
+    
+    // delay medio segundo
+    setTimeout(() => {
+        desvanecerVolumen(musicaFondo, 'subir');
+    }, 500);
 }
 
 // --- 5. LÓGICA DE LOS PUNTITOS DEL CARRUSEL ---
 const carrusel = document.getElementById('carrusel');
 const puntos = document.querySelectorAll('.punto');
 
-carrusel.addEventListener('scroll', () => {
-    let index = Math.round(carrusel.scrollLeft / carrusel.clientWidth);
-    
-    puntos.forEach(punto => punto.classList.remove('activo'));
-    
-    if(puntos[index]) {
-        puntos[index].classList.add('activo');
-    }
-});
+if(carrusel) {
+    carrusel.addEventListener('scroll', () => {
+        let index = Math.round(carrusel.scrollLeft / carrusel.clientWidth);
+        puntos.forEach(punto => punto.classList.remove('activo'));
+        if(puntos[index]) {
+            puntos[index].classList.add('activo');
+        }
+    });
+}
