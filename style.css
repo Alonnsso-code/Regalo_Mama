@@ -137,7 +137,7 @@ body {
     white-space: pre-wrap; 
     margin: 0;
     background-image: repeating-linear-gradient(transparent, transparent 31px, #E8DFD5 32px);
-    background-position: 0 8px; 
+    background-position: 0 1px; 
 }
 
 /* --- SECCIÓN FINAL --- */
