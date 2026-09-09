@@ -67,7 +67,7 @@ const textosFamilia = {
         cancion: "cancion-hermano.mp3" 
     },
     'papa': { 
-        titulo: "De: Amor", 
+        titulo: "De: Cristian", 
         cuerpo: "Escribe aquí el mensaje de tu papá...",
         cancion: "cancion-papa.mp3" 
     }
