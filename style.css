@@ -82,7 +82,12 @@ body {
     border-radius: 2px; position: relative;
     transform: scale(0.95); 
 }
-.polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; filter: sepia(10%); }
+.polaroid img { width: 100%;
+               aspect-ratio: 1/1;
+               object-fit: cover;
+               object-position: top:;
+               filter: sepia(15%);
+              }
 .texto-polaroid {
     position: absolute; bottom: 15px; width: calc(100% - 24px); text-align: center;
     font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--texto-oscuro);
