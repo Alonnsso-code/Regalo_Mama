@@ -152,6 +152,11 @@ body {
 .copa { transform-origin: bottom center; }
 .copa-izq { animation: chocar-izq 2.5s infinite ease-in-out; }
 .copa-der { animation: chocar-der 2.5s infinite ease-in-out; }
+.foto-final {
+    width: 85%;
+    max-width: 320px; /* El mismo ancho máximo que el carrusel */
+    flex: none; /* Le quita la orden de expandirse infinitamente */
+}
 
 @keyframes chocar-izq { 0%, 100% { transform: rotate(0deg) translateX(0); } 50% { transform: rotate(15deg) translateX(8px); } }
 @keyframes chocar-der { 0%, 100% { transform: rotate(0deg) translateX(0); } 50% { transform: rotate(-15deg) translateX(-8px); } }
