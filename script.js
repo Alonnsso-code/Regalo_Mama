@@ -53,7 +53,7 @@ corazon.addEventListener('click', () => {
 const textosFamilia = {
     'alonso': { 
         titulo: "De: Diego", 
-        cuerpo: "Feliz cumpleaños mamá.\n\nEres la mejor del mundo y quería hacerte este detalle para que lo tengas siempre en tu celular.",
+        cuerpo: "Feliz cumpleaños mamá.\n\nQuería que este fuera un regalo especial, así que lo hice con mucho cariño para ti con ayuda de mi papá.\n\nMuchas gracias por todo lo que me has dado durante toda mi vida, eres la mejor. Te amo muchísimo, espero te guste el regalo.",
         cancion: "cancion-alonso.mp3" 
     },
     'hermana': { 
@@ -67,7 +67,7 @@ const textosFamilia = {
         cancion: "cancion-hermano.mp3" 
     },
     'papa': { 
-        titulo: "De: Cristian", 
+        titulo: "De: Amor", 
         cuerpo: "Escribe aquí el mensaje de tu papá...",
         cancion: "cancion-papa.mp3" 
     }
