@@ -63,7 +63,7 @@ const textosFamilia = {
     },
     'hermano': { 
         titulo: "De: Emi", 
-        cuerpo: "Escribe aquí el mensaje de tu hermano...",
+        cuerpo: "El emi dice: \n\nfeliz cumpleaños mamita linda, te amo mucho ",
         cancion: "cancion-hermano.mp3" 
     },
     'papa': { 
