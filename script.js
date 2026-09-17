@@ -133,6 +133,14 @@ function abrirCarta(autor) {
     
     if (musicaCarta) {
         musicaCarta.src = textosFamilia[autor].cancion;
+        
+        // --- NUEVA REGLA: Adelantar la canción si lo pide ---
+        if (textosFamilia[autor].segundoInicio) {
+            musicaCarta.currentTime = textosFamilia[autor].segundoInicio;
+        } else {
+            musicaCarta.currentTime = 0; // Si no dice nada, empieza desde cero
+        }
+        
         desvanecerVolumen(musicaCarta, 'subir');
     }
 }
