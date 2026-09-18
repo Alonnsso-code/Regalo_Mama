@@ -69,7 +69,7 @@ const textosFamilia = {
     },
     'papa': { 
         titulo: "De: Amor", 
-        cuerpo: "Hola amor,\n\nEspero que en este día tan especial para nuestra familia, el cumpleaños de la mujer más importante en nuestras vidas y en especial en la mía, te deseo un muy feliz cumpleaños, y que este regalito que te preparamos con mucho amor lo puedas ver siempre y recuerdes lo mucho que te amamos. Feliz cumpleaños mi vida hermosa. Te Amo.",
+        cuerpo: "Hola amor,\n\nEspero que en este día tan especial para nuestra familia, el cumpleaños de la mujer más importante en nuestras vidas y en especial en la mía, te deseo un muy feliz cumpleaños, y que este regalito que te preparamos con mucho amor lo puedas ver siempre y recuerdes lo mucho que te amamos. \n\nFeliz cumpleaños mi vida hermosa. Te Amo.",
         cancion: "cancion-papa.mp3" 
     }
 };
