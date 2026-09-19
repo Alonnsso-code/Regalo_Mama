@@ -58,7 +58,7 @@ const textosFamilia = {
     },
     'hermana': { 
         titulo: "De: Flo", 
-        cuerpo: "Escribe aquí el mensaje de tu hermana...",
+        cuerpo: "Feliz cumpleaños mamá.\n\nHoy en tu día especial te quiero decir que te amo mucho, gracias por siempre estar conmigo apoyándome, acompañándome y dándome confianza para contarte mis cosas.\n\nTe amo mamá nunca lo olvides, pásalo increíble hoy. \n\nFeliz cumpleaños❤️",
         cancion: "cancion-hermana.mp3" 
     },
     'hermano': { 
